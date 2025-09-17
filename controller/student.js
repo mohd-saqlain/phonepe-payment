@@ -68,4 +68,14 @@ const createStudent = async (req, res) => {
   }
 };
 
-module.exports = { createStudent };
+const getStudents = async (req, res) => {
+  try {
+    const students = await Student.find().sort({ createdAt: -1 });
+    res.status(200).send(students);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message || "Internal Server Error");
+  }
+};
+
+module.exports = { createStudent, getStudents };
