@@ -6,7 +6,6 @@ const studentSchema = mongoose.Schema({
         required:true,
     },
     phoneNo:{
-        unique:true,
         type:String,
         required:true,
     },
