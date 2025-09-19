@@ -8,8 +8,7 @@ const env = Env.SANDBOX;
 
 
 const phone = "917572082633";
-const message = "Please share your payment details here.";
-const link = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+const getEncodedUrl = (text) => `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 
 const client = StandardCheckoutClient.getInstance(
   clientId,
@@ -19,12 +18,9 @@ const client = StandardCheckoutClient.getInstance(
 );
 
 const amount = 100;
-const redirectUrl = link;
 
 const createStudent = async (req, res) => {
   try {
-    console.log(clientId, clientSecret, clientVersion);
-    console.log(req.body);
     const { fullName, phoneNo, email, refferalCode, attendanceMode } = req.body;
     if (
       !fullName ||
@@ -37,12 +33,7 @@ const createStudent = async (req, res) => {
         .status(400)
         .send("Full Name, Phone Number and Attendance Mode are required");
     }
-    const isExist = await Student.findOne({ phoneNo });
-    if (isExist) {
-      return res
-        .status(400)
-        .send("Student with this phone number already exists");
-    }
+    const redirectUrl = getEncodedUrl(`New Registration\nName: ${fullName}\nPhone: ${phoneNo}\nEmail: ${email || "N/A"}\nReferral Code: ${refferalCode || "N/A"}\nAttendance Mode: ${attendanceMode}`);
     const student = new Student({
       fullName,
       phoneNo,
