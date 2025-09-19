@@ -4,7 +4,7 @@ const { Env, MetaInfo, StandardCheckoutPayRequest, StandardCheckoutClient } = re
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const clientVersion = process.env.CLIENT_VERSION;
-const env = Env.SANDBOX;
+const env = Env.PRODUCTION;
 
 
 const phone = "917572082633";
