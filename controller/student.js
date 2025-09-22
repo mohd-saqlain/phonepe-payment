@@ -17,7 +17,7 @@ const client = StandardCheckoutClient.getInstance(
   env
 );
 
-const amount = 100;
+const amount =  349*100;
 
 const createStudent = async (req, res) => {
   try {
